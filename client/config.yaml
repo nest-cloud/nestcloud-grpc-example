@@ -1,0 +1,12 @@
+consul:
+  host: localhost
+  port: 8500
+  discoveryHost: localhost
+  healthCheck:
+    timeout: 1s
+    interval: 10s
+  maxRetry: 5
+  retryInterval: 5000
+  service:
+    name: rpc-client
+    port: 3004
