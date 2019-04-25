@@ -21,7 +21,7 @@ A NodeJS micro-service solution based on Consul, writing by Typescript language 
 
 * Consul
 
-## Requirements Components
+## Requirement Components
 
 * @nestcloud/common
 * @nestcloud/core
@@ -33,9 +33,10 @@ A NodeJS micro-service solution based on Consul, writing by Typescript language 
 ## How to run
 
 ```bash
-npm run start:server1
-npm run start:server2
-npm run start:client
+yarn
+yarn run start:server1
+yarn run start:server2
+yarn run start:client
 ```
 
 Then visit http://localhost:3004

@@ -1,21 +1,22 @@
-import { Controller, Get, OnModuleInit } from '@nestjs/common';
-import { GrpcClient, LbClient } from '@nestcloud/grpc';
+import { Controller, Get } from '@nestjs/common';
+import { GrpcClient, RpcClient, Service } from '@nestcloud/grpc';
 import { HeroService } from './interfaces/hero-service.interface';
 import { join } from 'path';
 
 @Controller()
-export class HeroController implements OnModuleInit {
-    @LbClient({
+export class HeroController {
+    @RpcClient({
         service: 'rpc-server',
         package: 'hero',
-        protoPath: join(__dirname, './hero.proto'),
+        protoPath: join(__dirname, './interfaces/hero-service.proto'),
     })
     private readonly client: GrpcClient;
+    @Service('HeroService', {
+        service: 'rpc-server',
+        package: 'hero',
+        protoPath: join(__dirname, './interfaces/hero-service.proto'),
+    })
     private heroService: HeroService;
-
-    onModuleInit() {
-        this.heroService = this.client.getService<HeroService>('HeroService');
-    }
 
     @Get()
     async execute(): Promise<any> {
