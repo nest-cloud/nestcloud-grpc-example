@@ -39,4 +39,4 @@ yarn run start:server2
 yarn run start:client
 ```
 
-Then visit http://localhost:3004
+Then visit http://localhost:3004/heros

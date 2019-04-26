@@ -1,9 +1,10 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { GrpcClient, RpcClient, Service } from '@nestcloud/grpc';
 import { HeroService } from './interfaces/hero-service.interface';
 import { join } from 'path';
+import { ListHeroResponse } from './interfaces/hero.interface';
 
-@Controller()
+@Controller('/heros')
 export class HeroController {
     @RpcClient({
         service: 'rpc-server',
@@ -18,9 +19,16 @@ export class HeroController {
     })
     private heroService: HeroService;
 
-    @Get()
-    async execute(): Promise<any> {
-        const data = await this.heroService.findOne({ id: 1 }).toPromise();
+    @Get('/:heroId')
+    async get(@Param('heroId') heroId: number): Promise<any> {
+        const data = await this.heroService.get({ id: heroId }).toPromise();
+        console.log(data);
+        return data;
+    }
+
+    @Get('/')
+    async list(): Promise<ListHeroResponse> {
+        const data = await this.heroService.list({}).toPromise();
         console.log(data);
         return data;
     }

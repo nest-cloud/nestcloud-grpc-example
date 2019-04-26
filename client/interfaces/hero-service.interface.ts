@@ -1,5 +1,8 @@
 import { Observable } from 'rxjs';
+import { GetHeroRequest, GetHeroResponse, ListHeroResponse } from './hero.interface';
 
 export interface HeroService {
-    findOne(data: { id: number }): Observable<any>;
+    get(data: GetHeroRequest): Observable<GetHeroResponse>;
+
+    list(data: any): Observable<ListHeroResponse>;
 }

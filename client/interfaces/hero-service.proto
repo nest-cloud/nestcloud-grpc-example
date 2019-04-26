@@ -2,13 +2,26 @@ syntax = "proto3";
 
 package hero;
 
+import "google/protobuf/empty.proto";
+
 service HeroService {
-    rpc FindOne (HeroById) returns (Hero) {
+    rpc Get (GetHeroRequest) returns (GetHeroResponse) {
+    }
+
+    rpc List (google.protobuf.Empty) returns (ListHeroResponse) {
     }
 }
 
-message HeroById {
+message ListHeroResponse {
+    repeated Hero heros = 1;
+}
+
+message GetHeroRequest {
     int32 id = 1;
+}
+
+message GetHeroResponse {
+    Hero hero = 1;
 }
 
 message Hero {

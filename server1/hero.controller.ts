@@ -1,14 +1,22 @@
 import { Controller } from '@nestjs/common';
 import { GrpcMethod } from '@nestjs/microservices';
-import { HeroById } from './interfaces/hero-by-id.interface';
-import { Hero } from './interfaces/hero.interface';
+import { GetHeroRequest, GetHeroResponse, Hero, ListHeroResponse } from './interfaces/hero.interface';
 
 @Controller()
 export class HeroController {
+    private readonly heros: Hero[] = [{ id: 1, name: 'John' }, { id: 2, name: 'Doe' }];
+
     @GrpcMethod('HeroService')
-    findOne(data: HeroById): Hero {
-        const items: Hero[] = [{ id: 1, name: 'John' }, { id: 2, name: 'Doe' }];
-        console.log('server1 invoked');
-        return items.find(({ id }) => id === data.id);
+    get(data: GetHeroRequest): GetHeroResponse {
+        console.log('server1 get invoked');
+        return {
+            hero: this.heros.find(({ id }) => id === data.id),
+        };
+    }
+
+    @GrpcMethod('HeroService')
+    list(): ListHeroResponse {
+        console.log('server1 list invoked');
+        return { heros: this.heros };
     }
 }
