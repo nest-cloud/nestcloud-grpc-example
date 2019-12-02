@@ -9,7 +9,7 @@ async function bootstrap() {
     await app.connectMicroservice({
         transport: Transport.GRPC,
         options: {
-            url: `0.0.0.0:${ NestCloud.global.boot.get('consul.service.port') }`,
+            url: `0.0.0.0:${NestCloud.global.boot.get('service.port')}`,
             package: 'hero',
             protoPath: join(__dirname, './hero.proto'),
         },

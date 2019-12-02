@@ -1,13 +1,13 @@
 consul:
   host: localhost
   port: 8500
+service:
   discoveryHost: localhost
   healthCheck:
     timeout: 1s
     interval: 10s
-    tcp: ${{ consul.discoveryHost }}:${{ consul.service.port }}
+    tcp: ${{ service.discoveryHost }}:${{ service.port }}
   maxRetry: 5
   retryInterval: 5000
-  service:
-    name: rpc-server
-    port: 50052
+  name: rpc-server
+  port: 50052
