@@ -24,7 +24,6 @@ A NodeJS micro-service solution based on Consul, writing by Typescript language 
 ## Requirement Components
 
 * @nestcloud/common
-* @nestcloud/core
 * @nestcloud/consul
 * @nestcloud/consul-service
 * @nestcloud/consul-loadbalance
